@@ -34,3 +34,26 @@ y_data = as.data.frame(y_data)
 
 ggplot(y_data, aes(x = year)) + geom_bar(aes(weight=count))
 ```
+
+## How are ratings distributed?
+
+The ratings are distrbuted in a somewhat normal distribution, with a median of 3.25. There are are few 1 ratings and a 5 rating as outliers.
+```{r}
+ggplot(choc, aes(x=Rating)) + geom_histogram(binwidth=0.1)
+
+```
+
+##Do ratings depend on the cocoa percentage of a chocolate bar?
+There is not a correlation between the rating and the cocoa percentage
+```{r}
+ggplot(data=choc, aes(x = Cocoa.Pct, y = Rating)) + geom_point()
+```
+
+##How do ratings compare across different company locations?
+The maximum and medians are the same, but canada has more higher rated chocolate, while the U.S. has more lower rated chocolate. france has more outliers, towards the lower ratings.
+```{r}
+top3 <- dplyr::filter(choc, Company.Location %in% c("U.S.A.", "France", "Canada"))
+ggplot(data=top3, aes(x = Company.Location, y = Rating)) + geom_boxplot()
+
+```
+
