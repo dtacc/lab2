@@ -1,0 +1,36 @@
+---
+title: "Lab02"
+author: "Nicholas Stout"
+date: "September 13, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+choc = read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+library(ggplot2)
+```
+## What is the overall number of chocolate bars rated?
+There Are 1852 chocolate bars rated
+```{r cars}
+dim(choc)
+```
+
+## How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
+
+```{r pressure}
+count = c()
+k = 1
+for (i in 2006 : 2017) {
+  count[k] = sum(choc$Review.Date == i)
+  k = k+1
+}
+
+year = c(2006:2017)
+y_data = cbind(year, count)
+
+y_data = as.data.frame(y_data)
+
+
+ggplot(y_data, aes(x = year)) + geom_bar(aes(weight=count))
+```
