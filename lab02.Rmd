@@ -1,9 +1,12 @@
 ---
 title: "Lab02"
-author: "Nicholas Stout"
+author: "Dan Tacconi, Isaac Nellans, Nicholas Stout"
 date: "September 13, 2018"
 output: html_document
 ---
+
+[github link](https://github.com/dtacc/lab2)
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -35,25 +38,46 @@ y_data = as.data.frame(y_data)
 ggplot(y_data, aes(x = year)) + geom_bar(aes(weight=count))
 ```
 
-## How are ratings distributed?
-
-The ratings are distrbuted in a somewhat normal distribution, with a median of 3.25. There are are few 1 ratings and a 5 rating as outliers.
+##How are ratings distributed? Draw a histogram of ratings and describe it. Don't forget to mention outliers, if there are any.
 ```{r}
-ggplot(choc, aes(x=Rating)) + geom_histogram(binwidth=0.1)
-
+ggplot(choc,aes(Rating))+geom_histogram(binwidth=.25)
 ```
+
+Most ratings are in the middle from 2.5 to 5 with outliers in the lower and higher range such as 1 and 5.
+
 
 ##Do ratings depend on the cocoa percentage of a chocolate bar?
-There is not a correlation between the rating and the cocoa percentage
+
 ```{r}
-ggplot(data=choc, aes(x = Cocoa.Pct, y = Rating)) + geom_point()
+ggplot(choc, aes(Rating, Cocoa.Pct))+geom_jitter()
 ```
 
-##How do ratings compare across different company locations?
-The maximum and medians are the same, but canada has more higher rated chocolate, while the U.S. has more lower rated chocolate. france has more outliers, towards the lower ratings.
+Ratings do not appear to depend on cocoa percentage
+
+
+##How do ratings compare across different company locations? Focus on the three locations with the most ratings:
 ```{r}
-top3 <- dplyr::filter(choc, Company.Location %in% c("U.S.A.", "France", "Canada"))
-ggplot(data=top3, aes(x = Company.Location, y = Rating)) + geom_boxplot()
+newchoc<- dplyr::filter(choc, Company.Location %in% c("U.S.A.", "France", "Canada"))
+
+ggplot(newchoc, aes(Company.Location, Rating))+ geom_boxplot()
 
 ```
+
+All three countries average around a 3.25 rating
+
+
+##Team question: What country makes the best chocolate?
+
+```{r}
+
+
+
+```
+
+##Team conclusion:
+
+
+##Workflow paragraph:
+In class on Thursday we all worked on the initial three questions individually. Nicholas was able to execute the solution to those questions first and upload them onto the github repo that Dan created. We all continued to work on the lab and discussed our group question and how we'd approach answering that question. Dan continued to add to the RMD file that Nicholas created and added it to the Lab 2 repo. ____??? finished the last questions and added it to github as our final product.
+
 
